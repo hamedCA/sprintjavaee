@@ -30,9 +30,9 @@ public class Carpool implements java.io.Serializable {
 	private Date creationDate;
 	private Date startDate;
 	private float price;
-	private int startPoint;
-	private int endPoint;
-	private int carpoolType;
+	private String startPoint;
+	private String endPoint;
+	private String carpoolType;
 	private Set<Trajet> trajets = new HashSet<Trajet>(0);
 	private Set<Groupcollocation> groupcollocations = new HashSet<Groupcollocation>(0);
 	private Set<User> users = new HashSet<User>(0);
@@ -40,8 +40,8 @@ public class Carpool implements java.io.Serializable {
 	public Carpool() {
 	}
 
-	public Carpool(int placeNumber, Date creationDate, Date startDate, float price, int startPoint, int endPoint,
-			int carpoolType) {
+	public Carpool(int placeNumber, Date creationDate, Date startDate, float price, String startPoint, String endPoint,
+String carpoolType) {
 		this.placeNumber = placeNumber;
 		this.creationDate = creationDate;
 		this.startDate = startDate;
@@ -51,8 +51,8 @@ public class Carpool implements java.io.Serializable {
 		this.carpoolType = carpoolType;
 	}
 
-	public Carpool(int placeNumber, String description, Date creationDate, Date startDate, float price, int startPoint,
-			int endPoint, int carpoolType, Set<Trajet> trajets, Set<Groupcollocation> groupcollocations,
+	public Carpool(int placeNumber, String description, Date creationDate, Date startDate, float price, String startPoint,
+			String endPoint, String carpoolType, Set<Trajet> trajets, Set<Groupcollocation> groupcollocations,
 			Set<User> users) {
 		this.placeNumber = placeNumber;
 		this.description = description;
@@ -79,7 +79,7 @@ public class Carpool implements java.io.Serializable {
 		this.carpoolId = carpoolId;
 	}
 
-	@Column(name = "Place_Number", nullable = false)
+	@Column(name = "Place_Number", nullable = true)
 	public int getPlaceNumber() {
 		return this.placeNumber;
 	}
@@ -98,7 +98,7 @@ public class Carpool implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "Creation_Date", nullable = false, length = 19)
+	@Column(name = "Creation_Date", nullable = true, length = 19)
 	public Date getCreationDate() {
 		return this.creationDate;
 	}
@@ -108,7 +108,7 @@ public class Carpool implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "StartDate", nullable = false, length = 19)
+	@Column(name = "StartDate", nullable = true, length = 19)
 	public Date getStartDate() {
 		return this.startDate;
 	}
@@ -117,7 +117,7 @@ public class Carpool implements java.io.Serializable {
 		this.startDate = startDate;
 	}
 
-	@Column(name = "Price", nullable = false, precision = 12, scale = 0)
+	@Column(name = "Price", nullable = true, precision = 12, scale = 0)
 	public float getPrice() {
 		return this.price;
 	}
@@ -126,37 +126,37 @@ public class Carpool implements java.io.Serializable {
 		this.price = price;
 	}
 
-	@Column(name = "StartPoint", nullable = false)
-	public int getStartPoint() {
+	@Column(name = "StartPoint", nullable = true)
+	public String getStartPoint() {
 		return this.startPoint;
 	}
 
-	public void setStartPoint(int startPoint) {
+	public void setStartPoint(String startPoint) {
 		this.startPoint = startPoint;
 	}
 
-	@Column(name = "EndPoint", nullable = false)
-	public int getEndPoint() {
+	@Column(name = "EndPoint", nullable = true)
+	public String getEndPoint() {
 		return this.endPoint;
 	}
 
-	public void setEndPoint(int endPoint) {
+	public void setEndPoint(String endPoint) {
 		this.endPoint = endPoint;
 	}
 
-	@Column(name = "CarpoolType", nullable = false)
-	public int getCarpoolType() {
+	@Column(name = "CarpoolType", nullable = true)
+	public String getCarpoolType() {
 		return this.carpoolType;
 	}
 
-	public void setCarpoolType(int carpoolType) {
+	public void setCarpoolType(String carpoolType) {
 		this.carpoolType = carpoolType;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "carpool_trajet", catalog = "room", joinColumns = {
-			@JoinColumn(name = "carpool_fk", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "trajet_fk", nullable = false, updatable = false) })
+			@JoinColumn(name = "carpool_fk", nullable = true, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "trajet_fk", nullable = true, updatable = false) })
 	public Set<Trajet> getTrajets() {
 		return this.trajets;
 	}
@@ -167,8 +167,8 @@ public class Carpool implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "carpool_group", catalog = "room", joinColumns = {
-			@JoinColumn(name = "carpool_fk", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "group_fk", nullable = false, updatable = false) })
+			@JoinColumn(name = "carpool_fk", nullable = true, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "group_fk", nullable = true, updatable = false) })
 	public Set<Groupcollocation> getGroupcollocations() {
 		return this.groupcollocations;
 	}
@@ -179,8 +179,8 @@ public class Carpool implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "carpools_users", catalog = "room", joinColumns = {
-			@JoinColumn(name = "carpools_fk", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "user_fk", nullable = false, updatable = false) })
+			@JoinColumn(name = "carpools_fk", nullable = true, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "user_fk", nullable = true, updatable = false) })
 	public Set<User> getUsers() {
 		return this.users;
 	}

@@ -3,7 +3,10 @@ package com.edu.PiJEE;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -61,6 +64,7 @@ public class User implements java.io.Serializable {
 	private Set<Collocationoffre> collocationoffres = new HashSet<Collocationoffre>(0);
 	private Set<Alert> alerts = new HashSet<Alert>(0);
 
+	private  List<Comment> comments;
 	public User() {
 	}
 
@@ -158,7 +162,7 @@ public class User implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "Birthday", nullable = false, length = 19)
+	@Column(name = "Birthday", nullable = true, length = 19)
 	public Date getBirthday() {
 		return this.birthday;
 	}
@@ -168,7 +172,7 @@ public class User implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CreateDate", nullable = false, length = 19)
+	@Column(name = "CreateDate", nullable = true, length = 19)
 	public Date getCreateDate() {
 		return this.createDate;
 	}
@@ -231,7 +235,7 @@ public class User implements java.io.Serializable {
 		this.hobbies = hobbies;
 	}
 
-	@Column(name = "Smoker", nullable = false)
+	@Column(name = "Smoker", nullable = true)
 	public boolean isSmoker() {
 		return this.smoker;
 	}
@@ -249,7 +253,7 @@ public class User implements java.io.Serializable {
 		this.picture = picture;
 	}
 
-	@Column(name = "ZipCode", nullable = false)
+	@Column(name = "ZipCode", nullable = true)
 	public int getZipCode() {
 		return this.zipCode;
 	}
@@ -267,7 +271,7 @@ public class User implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "EmailConfirmed", nullable = false)
+	@Column(name = "EmailConfirmed", nullable = true)
 	public boolean isEmailConfirmed() {
 		return this.emailConfirmed;
 	}
@@ -303,7 +307,7 @@ public class User implements java.io.Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@Column(name = "PhoneNumberConfirmed", nullable = false)
+	@Column(name = "PhoneNumberConfirmed", nullable = true)
 	public boolean isPhoneNumberConfirmed() {
 		return this.phoneNumberConfirmed;
 	}
@@ -312,7 +316,7 @@ public class User implements java.io.Serializable {
 		this.phoneNumberConfirmed = phoneNumberConfirmed;
 	}
 
-	@Column(name = "TwoFactorEnabled", nullable = false)
+	@Column(name = "TwoFactorEnabled", nullable = true)
 	public boolean isTwoFactorEnabled() {
 		return this.twoFactorEnabled;
 	}
@@ -331,7 +335,7 @@ public class User implements java.io.Serializable {
 		this.lockoutEndDateUtc = lockoutEndDateUtc;
 	}
 
-	@Column(name = "LockoutEnabled", nullable = false)
+	@Column(name = "LockoutEnabled", nullable = true)
 	public boolean isLockoutEnabled() {
 		return this.lockoutEnabled;
 	}
@@ -340,7 +344,7 @@ public class User implements java.io.Serializable {
 		this.lockoutEnabled = lockoutEnabled;
 	}
 
-	@Column(name = "AccessFailedCount", nullable = false)
+	@Column(name = "AccessFailedCount", nullable = true)
 	public int getAccessFailedCount() {
 		return this.accessFailedCount;
 	}
@@ -367,7 +371,7 @@ public class User implements java.io.Serializable {
 		this.typeOfRental = typeOfRental;
 	}
 
-	@Column(name = "Discriminator", nullable = false, length = 128)
+	@Column(name = "Discriminator", nullable = true, length = 128)
 	public String getDiscriminator() {
 		return this.discriminator;
 	}
@@ -378,8 +382,8 @@ public class User implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "carpools_users", catalog = "room", joinColumns = {
-			@JoinColumn(name = "user_fk", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "carpools_fk", nullable = false, updatable = false) })
+			@JoinColumn(name = "user_fk", nullable = true, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "carpools_fk", nullable = true, updatable = false) })
 	public Set<Carpool> getCarpools() {
 		return this.carpools;
 	}
@@ -390,8 +394,8 @@ public class User implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "collogroups_users", catalog = "room", joinColumns = {
-			@JoinColumn(name = "user_fk", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "group_fk", nullable = false, updatable = false) })
+			@JoinColumn(name = "user_fk", nullable = true, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "group_fk", nullable = true, updatable = false) })
 	public Set<Groupcollocation> getGroupcollocations() {
 		return this.groupcollocations;
 	}
@@ -402,8 +406,8 @@ public class User implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "appartementuser", catalog = "room", joinColumns = {
-			@JoinColumn(name = "User_Id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "Appartement_AppartementId", nullable = false, updatable = false) })
+			@JoinColumn(name = "User_Id", nullable = true, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "Appartement_AppartementId", nullable = true, updatable = false) })
 	public Set<Appartement> getAppartements() {
 		return this.appartements;
 	}
@@ -450,8 +454,8 @@ public class User implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "aspnetuserroles", catalog = "room", joinColumns = {
-			@JoinColumn(name = "UserId", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "RoleId", nullable = false, updatable = false) })
+			@JoinColumn(name = "UserId", nullable = true, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "RoleId", nullable = true, updatable = false) })
 	public Set<Aspnetroles> getAspnetroleses() {
 		return this.aspnetroleses;
 	}
@@ -476,6 +480,33 @@ public class User implements java.io.Serializable {
 
 	public void setAlerts(Set<Alert> alerts) {
 		this.alerts = alerts;
+	}
+    @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public User(String id, String firstName, String lastname, Date birthday, Date createDate, String gender,
+			String country, String street, String mainActivity, String email, String passwordHash, String phoneNumber,
+			String userName) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastname = lastname;
+		this.birthday = birthday;
+		this.createDate = createDate;
+		this.gender = gender;
+		this.country = country;
+		this.street = street;
+		this.mainActivity = mainActivity;
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.phoneNumber = phoneNumber;
+		this.userName = userName;
 	}
 
 }

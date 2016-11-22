@@ -28,6 +28,10 @@
     <version>3.8.1</version>
     <scope>test</scope>
 </dependency>
+<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

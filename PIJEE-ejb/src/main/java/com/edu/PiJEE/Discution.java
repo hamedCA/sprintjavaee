@@ -6,9 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.List;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +28,17 @@ public class Discution implements java.io.Serializable {
 	private String titre;
 	private String text;
 
+	private  List<Comment> comments;
+
 	public Discution() {
+	}
+    @OneToMany(mappedBy="discution")
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public Discution(Groupcollocation groupcollocation) {

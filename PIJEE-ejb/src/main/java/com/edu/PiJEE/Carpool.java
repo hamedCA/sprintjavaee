@@ -3,6 +3,7 @@ package com.edu.PiJEE;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +26,10 @@ import javax.persistence.TemporalType;
 @Table(name = "carpool", catalog = "room")
 public class Carpool implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer carpoolId;
 	private int placeNumber;
 	private String description;
@@ -36,6 +42,8 @@ public class Carpool implements java.io.Serializable {
 	private Set<Trajet> trajets = new HashSet<Trajet>(0);
 	private Set<Groupcollocation> groupcollocations = new HashSet<Groupcollocation>(0);
 	private Set<User> users = new HashSet<User>(0);
+	private List<Favorite> favorites;
+
 
 	public Carpool() {
 	}
@@ -187,6 +195,15 @@ public class Carpool implements java.io.Serializable {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
+	}
+	@OneToMany(mappedBy = "carpool")
+
+	public List<Favorite> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<Favorite> favorites) {
+		this.favorites = favorites;
 	}
 
 }

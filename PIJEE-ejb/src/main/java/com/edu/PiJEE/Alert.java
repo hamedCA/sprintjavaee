@@ -31,6 +31,7 @@ public class Alert implements java.io.Serializable {
 	private int startPoint;
 	private int endPoint;
 	private String critere;
+	
 
 	public Alert() {
 	}

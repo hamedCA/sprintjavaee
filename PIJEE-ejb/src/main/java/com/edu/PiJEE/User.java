@@ -3,7 +3,10 @@ package com.edu.PiJEE;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,6 +26,10 @@ import javax.persistence.TemporalType;
 @Table(name = "user", catalog = "room")
 public class User implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String firstName;
 	private String lastname;
@@ -60,6 +67,7 @@ public class User implements java.io.Serializable {
 	private Set<Aspnetroles> aspnetroleses = new HashSet<Aspnetroles>(0);
 	private Set<Collocationoffre> collocationoffres = new HashSet<Collocationoffre>(0);
 	private Set<Alert> alerts = new HashSet<Alert>(0);
+	private List<Favorite> favorites;
 
 	public User() {
 	}
@@ -476,6 +484,15 @@ public class User implements java.io.Serializable {
 
 	public void setAlerts(Set<Alert> alerts) {
 		this.alerts = alerts;
+	}
+	@OneToMany(mappedBy = "user")
+
+	public List<Favorite> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<Favorite> favorites) {
+		this.favorites = favorites;
 	}
 
 }
